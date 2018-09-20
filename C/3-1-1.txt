@@ -1,0 +1,15 @@
+5行目で3/MINが自然数ではないのに%dで値を出力していることが原因。
+これを改善するためにはdefineを使う場合は5行目の
+printf("%d" ,3/MIN);
+を
+printf("%lf" ,3.0/MIN);
+とする必要がある。
+constを使う場合は2行目の
+#define MIN -2
+を
+const double MIN=-2.0;
+に書き換え、さらに5行目の
+printf("%d" ,3/MIN);
+を
+printf("%lf" ,3/MIN);
+とする必要がある。
