@@ -36,9 +36,6 @@ void Ans(FILE* fp,FILE* fp2){
   }
   s/=cn;
   s=sqrt(s);
-#ifndef FLS
-  fp2=stdout;
-#endif
   fprintf(fp2,"平均:%f  ,標準偏差:%f  ,最大値:%f  ,最小値:%f\n",ave,s,max,min);
 }
 
@@ -60,9 +57,6 @@ void Ghis(FILE* fp,FILE* fp2){
     i=0.0;
   }
   ct-=1;
-#ifndef FLS
-  fp2=stdout;
-#endif
   for(j=0;j<ct;j++){
     fprintf(fp2,"%f-%f:",i,i+D);
     for(k=0;k<a[j];k++){
@@ -82,7 +76,11 @@ int main(int argc, char *argv[]){
 
   lm="reslut.dat";
   fp2=fWopen(lm);
-  
+#ifndef FLS
+  fclose(fp2);
+  fp2=stdout;
+#endif  
+
   agv=argv[2];
   agv2=argv[1];
   if(argc>3){
@@ -100,5 +98,7 @@ int main(int argc, char *argv[]){
   default:
     Usage();
   }
+  fclose(fp);
+  fclose(fp2);
   return 0;
 }
