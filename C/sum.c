@@ -5,11 +5,11 @@ int main( int argc, char *argv[]){
   double x=0.0;
   if(argc!=3){
     printf("Usage : sum <num1> <num2>\n");
+    return EXIT_FAILURE;
   }
-  else{
-    for(i=1;i<argc;i++){
-      x+=atof(argv[i]);
-	}
-    printf("%lf\n",x);
+  for(i=1;i<argc;i++){
+    x+=atof(argv[i]);
   }
+  printf("%lf\n",x);
+  return EXIT_SUCCESS;
 }

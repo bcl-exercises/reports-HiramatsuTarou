@@ -4,8 +4,9 @@
 /* main */
 int main(int argc, char *argv[]) {
     int i, *p;
-    int nmemb = atoi(argv[1]);
-
+    int nmemb;
+    
+    nmemb=atoi(argv[1]);
     if ( (p = (int *)calloc(nmemb, sizeof(int))) == NULL ) {
         fprintf(stderr, "メモリが確保できません.\n");
         return EXIT_FAILURE;

@@ -1,0 +1,9 @@
+plot 1.0*exp(x)
+replot 2.0*exp(x)
+replot 3.0*exp(x)
+replot 4.0*exp(x)
+replot -1.0*exp(x)
+replot -2.0*exp(x)
+replot -3.0*exp(x)
+replot -4.0*exp(x)
+replot 0
