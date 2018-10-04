@@ -21,7 +21,7 @@ int main(void){
     y=y0+v0*ht+(1.0/2.0)*(-g)*ht*ht;
     x=x0+vx*ht;
     printf("%lf,%lf\n",x,y);
-    ht=ht+h;
+    ht+=h;
   } while(y>=0.0);
   return 0;
 }

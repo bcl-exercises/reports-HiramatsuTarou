@@ -18,9 +18,9 @@ int main(int argc,char *argv[]){
   x0=0.0;
   
   do{
-    v0=v0+h*(-g);
-    y0=y0+v0*h+(1.0/2.0)*(-g)*pow(h,2.0);
-    x0=x0+vx*h;
+    y0+=h*v0;
+    v0+=h*(-g);
+    x0+=vx*h;
     printf("%lf,%lf\n",x0,y0);
   } while(y0>0.0);
   return 0;

@@ -14,17 +14,10 @@ void Usage(){
   printf("-g) Output a histogram\n");
 }
 
-void Ans(char* fname){
-  FILE* fp;
-  FILE* fp2;
+void Ans(FILE* fp,FILE* fp2){
   char str[N];
-  char *lm;
   int cn=0,k;
   double s=0.0,ave=0.0,max=0.0,min=1.0,x,dt[N]={};
-
-  lm="reslut.dat";
-  fp=fRopen(fname);
-  fp2=fWopen(lm);
 
   while(fgets(str,N,fp)!=NULL){
     x=atof(str);
@@ -37,31 +30,24 @@ void Ans(char* fname){
     cn+=1;
   }
 
-  ave=ave/cn;
+  ave/=cn;
   for(k=0;k<cn;k++){
     s+=pow((dt[k]-ave),2.0);
   }
-  s=s/cn;
+  s/=cn;
   s=sqrt(s);
   #ifdef FLS
   fprintf(fp2,"平均:%f  ,標準偏差:%f  ,最大値:%f  ,最小値:%f\n",ave,s,max,min);
   #else
-  printf("平均:%lf  ,標準偏差:%lf  ,最大値:%lf  ,最小値:%lf\n",ave,s,max,min);
+  fprintf(stdout,"平均:%lf  ,標準偏差:%lf  ,最大値:%lf  ,最小値:%lf\n",ave,s,max,min);
   #endif
 }
 
-void Ghis(char* fname){
-  FILE* fp;
-  FILE* fp2;
+void Ghis(FILE* fp,FILE* fp2){
   char str[N];
-  char *lm;
   double x,i=0.0;
   int a[N]={};
   int ct,j,k;
-
-  lm="reslut.dat";
-  fp=fRopen(fname);
-  fp2=fWopen(lm);
 
  while(fgets(str,N,fp)!=NULL){
     x=atof(str);
@@ -74,7 +60,7 @@ void Ghis(char* fname){
     }
     i=0.0;
   }
-  ct=ct-1;
+  ct-=1;
   #ifdef FLS
   for(j=0;j<ct;j++){
     fprintf(fp2,"%f-%f:",i,i+D);
@@ -86,11 +72,11 @@ void Ghis(char* fname){
   }
   #else
   for(j=0;j<ct;j++){
-    printf("%lf-%lf:",i,i+D);
+    fprintf(stdout,"%lf-%lf:",i,i+D);
     for(k=0;k<a[j];k++){
-      printf("*");
+      fprintf(stdout,"*");
     }
-    printf("\n");
+    fprintf(stdout,"\n");
     i+=D;
   }
   #endif
@@ -98,20 +84,32 @@ void Ghis(char* fname){
 
 int main(int argc, char *argv[]){
   char *agv;
-  agv=argv[1];
+  char *agv2;
+  FILE *fp;
+  FILE* fp2;
+  char *lm;
+
+  lm="reslut.dat";
+  fp=fRopen(ln)
+  fp2=fWopen(lm);
+  
+  agv=argv[2];
+  agv2=argv[1];
   if(argc>3){
     fprintf(stderr, "一度に指定できるオプションは一つまでです.\n");
     return  EXIT_FAILURE;
   }
-  switch(agv[1]){
+  fp=fRopen(agv);
+  switch(agv2[1]){
   case 'a':
-    Ans(argv[2]);
+    Ans(fp,fp2);
     break;
   case 'g':
-    Ghis(argv[2]);
+    Ghis(fp,fp2);
     break;
   default:
     Usage();
   }
   return 0;
+}
 }

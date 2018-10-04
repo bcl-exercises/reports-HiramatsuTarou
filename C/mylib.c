@@ -3,15 +3,19 @@
 
 FILE* fRopen(char* fname){
   FILE* fp;
-   if((fp = fopen(fname, "r")) == NULL)
+   if((fp = fopen(fname, "r")) == NULL){
      fprintf(stderr, "Failed to open %s\n", fname);
+      exit(0); 
+   }
    return fp;
 }
 
 FILE* fWopen(char* fname){
   FILE* fp;
-   if((fp = fopen(fname, "w")) == NULL)
+  if((fp = fopen(fname, "w")) == NULL){
      fprintf(stderr, "Failed to open %s\n", fname);
+      exit(0);  
+  }
    return fp;
 }
 
@@ -20,10 +24,12 @@ FILE* fRPopen(char* fname){
   
   if(fname[0]=='-'){
     fp=stdin;
+    return fp;
   }
-  else{
-    if((fp = fopen(fname, "r")) == NULL)
-      fprintf(stderr, "Failed to open %s\n", fname);
+  if((fp = fopen(fname, "r")) == NULL){
+    fprintf(stderr, "Failed to open %s\n", fname);
+    exit(0); 
   }
   return fp;
 }
+  
