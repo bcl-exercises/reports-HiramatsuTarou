@@ -8,6 +8,10 @@ static double g=9.8;
 int main(int argc,char *argv[]){
   double y0,x0,a,b,st,v0,vx,v,ht,h;
   
+  if(argc<3){
+    fprintf(stderr,"引数が足りません。一つ目に投射角度を、２つ目に初速度を指定してください\n");
+    exit(0);
+  }
   a=atof(argv[1]);
   b=atof(argv[2]);
   st=a*(M_PI/180.0);

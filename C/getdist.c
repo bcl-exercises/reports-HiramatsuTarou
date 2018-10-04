@@ -36,11 +36,10 @@ void Ans(FILE* fp,FILE* fp2){
   }
   s/=cn;
   s=sqrt(s);
-  #ifdef FLS
+#ifndef FLS
+  fp2=stdout;
+#endif
   fprintf(fp2,"平均:%f  ,標準偏差:%f  ,最大値:%f  ,最小値:%f\n",ave,s,max,min);
-  #else
-  fprintf(stdout,"平均:%lf  ,標準偏差:%lf  ,最大値:%lf  ,最小値:%lf\n",ave,s,max,min);
-  #endif
 }
 
 void Ghis(FILE* fp,FILE* fp2){
@@ -61,7 +60,9 @@ void Ghis(FILE* fp,FILE* fp2){
     i=0.0;
   }
   ct-=1;
-  #ifdef FLS
+#ifndef FLS
+  fp2=stdout;
+#endif
   for(j=0;j<ct;j++){
     fprintf(fp2,"%f-%f:",i,i+D);
     for(k=0;k<a[j];k++){
@@ -70,16 +71,6 @@ void Ghis(FILE* fp,FILE* fp2){
     fprintf(fp2,"\n");
     i+=D;
   }
-  #else
-  for(j=0;j<ct;j++){
-    fprintf(stdout,"%lf-%lf:",i,i+D);
-    for(k=0;k<a[j];k++){
-      fprintf(stdout,"*");
-    }
-    fprintf(stdout,"\n");
-    i+=D;
-  }
-  #endif
 }
 
 int main(int argc, char *argv[]){
@@ -90,7 +81,6 @@ int main(int argc, char *argv[]){
   char *lm;
 
   lm="reslut.dat";
-  fp=fRopen(ln)
   fp2=fWopen(lm);
   
   agv=argv[2];
@@ -111,5 +101,4 @@ int main(int argc, char *argv[]){
     Usage();
   }
   return 0;
-}
 }
