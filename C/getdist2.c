@@ -77,10 +77,10 @@ int main(int argc, char *argv[]){
   char *lm;
 
   lm="reslut.dat";
-  fp2=fWopen(lm);
 #ifndef FLS
-  fclose(fp2);
   fp2=stdout;
+#else
+  fp2=fWopen(lm);
 #endif
   
   agv=argv[argc-1];

@@ -14,7 +14,7 @@ Loadlibs=
 3-2-4: 3-2-4.c
 	gcc -o 3-2-4 3-2-4.c
 
-3-2-4f: 3-2-4f.c
+3-2-4f:3-2-4f.c
 	gcc -o 3-2-4f 3-2-4f.c
 
 array: array.c
@@ -23,20 +23,37 @@ array: array.c
 array2: array2.c
 	gcc -o array2 array2.c
 
-mylib: mylib.c
-	gcc -c -o mylib.o mylib.c
+getdist: getdist.o mylib.o
+	gcc -o getdist getdist.o mylib.o -lm
 
-clean: 
-	 rm *.o *~
+getdist2: getdist2.o mylib.o
+	gcc -o getdist2 getdist2.o mylib.o -lm
 
 genrand: genrand.c
 	gcc -o genrand genrand.c
 
-getdist: getdist.c
-	gcc -c -o getdist.o getdeist.c
+getdist.o: getdist.c
+	gcc -c -o getdist.o getdist.c
 
-Getdist: getdist.o mylib.o
-	gcc -o getdist getdist.o mylib.o
+getdist2.o: getdist2.c
+	gcc -c -o getdist2.o getdist2.c
+
+mylib: mylib.c
+	gcc -c -o mylib.o mylib.c
+
+7-1-b: 7-1-b.c
+	gcc -o 7-1-b 7-1-b.c
+
+7-2-b: 7-2-b.c
+	gcc -o 7-2-b 7-2-b.c -lm
+
+7-2-c: 7-2-c.c
+	gcc -o 7-2-c 7-2-c.c -lm
+
+clean:
+	rm *.o *~
+
+
 
 
 
